@@ -115,3 +115,16 @@
     }
   }
 }
+
+# Nermeen chat
+1.	Chat with Nermeen
+2.	Youssef is using nrmt as his reference. You can follow that or stick to what you have which is avmt.
+3.	Use VS code for the glue script. It won’t show in AWS.
+a.	Include the error screenshot and explanation for any new person.
+4.	See glue-job-cfn.yaml and glue-cfn.yaml files.
+5.	Youssef document
+a.	Use his infra as code sections  For your Glue and Glue database/tables section
+b.	Use his Lambda section since his LakeFormation is too detailed/long
+6.	Don’t explain the glue script in detail  just the overall idea
+7.	Mention Job parameters under Job Details tab
+8.	Focus on cloud formation over script
