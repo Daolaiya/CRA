@@ -201,8 +201,9 @@
   }
 }
 
-All code blocks
-Got right code sections
-Separated by ... in places
-If wrong,  what is the right code block - give it to me and tell me which file/lines to find it
-If anything needs to be highlighted for emphasis (see code blocks under x and y), which parts would it be?
+# Misc
+- Use emboldening for speaking notes.
+- Share document before meeting.
+- Explain how the content from the services above this lead into yours.
+
+- In the main-cfn.yaml - conditions subsection, do I need to include a code block from pipeline-config-dev.json or is what I have sufficient?
