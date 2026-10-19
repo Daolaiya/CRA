@@ -1,0 +1,6 @@
+I want very deep thought on this.
+
+Attached is a repository for a workflow that uses the AWS console (with multiple AWS services), Azure Devops platform (for storing repositories) and the AWS Sagemaker Unified Studio/SMUS (for creating and publishing data sources, data products and data assets).
+
+The workflow involves making changes to the repo code as needed then pushing to AWS CodeCommit or Azure repo which I believe then triggers an AWS CodePipeline which leads to different services potentially including SNS, lambda, cloud formation.
+
