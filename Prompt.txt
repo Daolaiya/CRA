@@ -1,0 +1,8 @@
+Repo prompt
+
+1. Ran in DEV environment no issue
+Why did it fail?
+Which errors are from AWS and which are from elsewhere?
+What is the script doing?
+Where did the table sipped errors come from?
+Why are schema in one environment but not the other? Isnt the script pulling from the same place in SMUS regardless of environment?

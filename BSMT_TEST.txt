@@ -1,0 +1,322 @@
+test_kg01_bronze_bsmt1_gluedb completed.
+
++-----------------+--------------+
+| table_name      |        count |
++-----------------+--------------+
+| tclnde          |    1,610,999 |
+| tcasddr         |    1,601,528 |
+| tactnsb         |      486,105 |
+| tactndf         |      485,185 |
+| tcastrg         |      331,414 |
+| tcassel         |      305,697 |
+| tcasids         |      255,895 |
+| tevnt           |      241,945 |
+| tjobrun         |      222,358 |
+| tcaside         |      189,987 |
+| tcasidr         |      187,727 |
+| tcdfact         |      182,351 |
+| tcdwidf         |      142,103 |
+| thlogat         |      141,802 |
+| tctbr           |      138,174 |
+| tctbrrt         |      138,138 |
+| tcascus         |      110,496 |
+| tcdcwfd         |      103,193 |
+| tcdwfdf         |       70,570 |
+| tcasfp          |       66,530 |
+| tevntbo         |       66,038 |
+| twflob          |       57,621 |
+| tcdfvw          |       54,409 |
+| tfilper         |       51,393 |
+| tcassui         |       50,236 |
+| tdelem          |       47,686 |
+| thlog           |       41,390 |
+| tdelfrm         |       38,822 |
+| tnotetx         |       38,533 |
+| tnote           |       37,582 |
+| tcaswcl         |       36,927 |
+| tcasact         |       35,168 |
+| tcasaud         |       34,794 |
+| tclnrsl         |       33,499 |
+| tmsgplk         |       33,445 |
+| taccsrl         |       29,252 |
+| tcasist         |       28,124 |
+| tnotede         |       27,561 |
+| tdelert         |       27,418 |
+| tdeletx         |       25,990 |
+| tdbenty         |       24,219 |
+| tcasirt         |       23,036 |
+| tcasisu         |       22,678 |
+| tclnact         |       22,566 |
+| tfilprt         |       21,196 |
+| tdelref         |       20,958 |
+| tcasisr         |       19,504 |
+| tausm           |       18,110 |
+| tcasprj         |       17,990 |
+| tcascc          |       17,749 |
+| tcaspha         |       17,655 |
+| tcd             |       16,657 |
+| tcascom         |       16,609 |
+| tcasarq         |       14,596 |
+| tcomcnt         |       14,571 |
+| tcdrt           |       13,966 |
+| tmsgpl          |       13,274 |
+| tausmrt         |       12,904 |
+| tclnrpn         |       12,621 |
+| tcdcat          |       12,109 |
+| tmenu           |       11,919 |
+| tcdcart         |       11,298 |
+| tprowfd         |       10,550 |
+| tcascnt         |       10,138 |
+| tcascnr         |       10,016 |
+| tmsg            |        9,677 |
+| tmsgrt          |        9,677 |
+| tcasfdg         |        9,109 |
+| taccsrr         |        8,288 |
+| tcasirs         |        7,955 |
+| tcasdef         |        7,759 |
+| tclnref         |        7,537 |
+| taurcsm         |        7,217 |
+| tcasdoc         |        6,383 |
+| tauqesb         |        5,765 |
+| tcasiwi         |        5,716 |
+| tclnrpa         |        5,700 |
+| tdbbtcl         |        4,944 |
+| tlegref         |        4,173 |
+| taurcsr         |        3,704 |
+| tcasprf         |        3,630 |
+| tcasreq         |        3,575 |
+| twfdart         |        3,517 |
+| tclnrcs         |        3,351 |
+| taurotc         |        3,240 |
+| twffup          |        3,171 |
+| tcobol          |        3,065 |
+| tisuwfd         |        2,922 |
+| tisudel         |        2,883 |
+| tcmpnt          |        2,676 |
+| tcasfpp         |        2,486 |
+| taustrt         |        2,410 |
+| tcasvrq         |        1,719 |
+| tissue          |        1,173 |
+| tdelass         |        1,151 |
+| tcaslck         |        1,123 |
+| tfunact         |        1,123 |
+| tclnspa         |        1,113 |
+| tcasvrs         |          993 |
+| tcasalr         |          936 |
+| tfutcng         |          863 |
+| tcascoi         |          860 |
+| tisutx          |          689 |
+| tcasfpw         |          676 |
+| tcidtgt         |          635 |
+| tisurt          |          572 |
+| tclnrlf         |          532 |
+| tdelwpe         |          504 |
+| tdellgv         |          471 |
+| tcrafrm         |          435 |
+| tjmsle          |          426 |
+| tacttrt         |          423 |
+| taupqes         |          392 |
+| tcrafrx         |          335 |
+| tauqe           |          322 |
+| tcdty           |          313 |
+| twirvw          |          282 |
+| tauqert         |          261 |
+| tsbjadd         |          231 |
+| tcasnrz         |          222 |
+| tcdtyat         |          193 |
+| tcidref         |          175 |
+| tauwics         |          171 |
+| tcasseg         |          156 |
+| tfctpgm         |          139 |
+| trndmsl         |          106 |
+| tcascut         |           73 |
+| tfctprt         |           69 |
+| tcasdlg         |           68 |
+| tcasref         |           51 |
+| tjmsno          |           42 |
+| tcappm          |           38 |
+| tcasmet         |           32 |
+| tjob            |           29 |
+| tcappcn         |           19 |
+| tcasfpr         |           13 |
+| taurcas         |           12 |
+| texpdtl         |           10 |
+| tcascos         |            9 |
+| tcitric         |            9 |
+| texrrdt         |            7 |
+| totip           |            7 |
+| taucncb         |            4 |
+| tcasisi         |            4 |
+| texrfdt         |            4 |
+| tcasfds         |            3 |
+| tmsgigp         |            2 |
++-----------------+--------------+
+
+Skipped tables:
+  - hciaprp_tmp (skipped_missing_target)
+  - jbpm_exceptionhandler (skipped_missing_target)
+  - jbpm_bytearray (skipped_missing_target)
+  - jbpm_comment (skipped_missing_target)
+  - hcasisu_tmp (skipped_missing_target)
+  - jbpm_event (skipped_missing_target)
+  - jbpm_byteblock (skipped_missing_target)
+  - jbpm_delegation (skipped_missing_target)
+  - jbpm_decisionconditions (skipped_missing_target)
+  - jbpm_action (skipped_missing_target)
+  - jbpm_id_permissions (skipped_missing_target)
+  - jbpm_id_group (skipped_missing_target)
+  - jbpm_id_membership (skipped_missing_target)
+  - jbpm_processdefinition (skipped_missing_target)
+  - jbpm_moduleinstance (skipped_missing_target)
+  - jbpm_job (skipped_missing_target)
+  - jbpm_moduledefinition (skipped_missing_target)
+  - jbpm_id_user (skipped_missing_target)
+  - jbpm_node (skipped_missing_target)
+  - jbpm_pooledactor (skipped_missing_target)
+  - jbpm_swimlane (skipped_missing_target)
+  - jbpm_processinstance (skipped_missing_target)
+  - jbpm_runtimeaction (skipped_missing_target)
+  - jbpm_swimlaneinstance (skipped_missing_target)
+  - jbpm_task (skipped_missing_target)
+  - jbpm_taskactorpool (skipped_missing_target)
+  - jbpm_tokenvariablemap (skipped_missing_target)
+  - jbpm_taskcontroller (skipped_missing_target)
+  - jbpm_taskinstance (skipped_missing_target)
+  - jbpm_token (skipped_missing_target)
+  - jbpm_variableinstance (skipped_missing_target)
+  - jbpm_variableaccess (skipped_missing_target)
+  - jbpm_transition (skipped_missing_target)
+  - tactnrl (skipped_zero_load)
+  - tactnda (skipped_zero_load)
+  - tattrib (skipped_zero_load)
+  - taucre (skipped_zero_load)
+  - tcasdsp (skipped_zero_load)
+  - tcashrs (skipped_zero_load)
+  - tcasisu_tmp (skipped_missing_target)
+  - tcasmed (skipped_zero_load)
+  - tcdass (skipped_zero_load)
+  - tcdfatr (skipped_zero_load)
+  - tcdfrma (skipped_zero_load)
+  - tciaprp_tmp (skipped_missing_target)
+  - tciaprp (skipped_zero_load)
+  - tcostc (skipped_missing_target)
+  - tcmpass (skipped_zero_load)
+  - tctbras (skipped_zero_load)
+  - tdbends (skipped_zero_load)
+  - tdbenrf (skipped_zero_load)
+  - tdelesp (skipped_zero_load)
+  - tesdtav (skipped_zero_load)
+  - tmemrdf (skipped_missing_target)
+  - tmemro (skipped_missing_target)
+  - tmemset (skipped_missing_target)
+  - tmemrrt (skipped_missing_target)
+  - tmsgbcp (skipped_zero_load)
+  - tmsgigs (skipped_zero_load)
+  - tpaapa (skipped_missing_target)
+  - tpaapsa (skipped_missing_target)
+  - tpaapsc (skipped_missing_target)
+  - tpaapss (skipped_missing_target)
+  - tprop (skipped_zero_load)
+  - trmdfrl (skipped_missing_target)
+  - trmdfvw (skipped_missing_target)
+  - trefmdf (skipped_zero_load)
+  - trole (skipped_missing_target)
+  - trolert (skipped_missing_target)
+  - trolset (skipped_missing_target)
+  - trolsys (skipped_missing_target)
+  - trolwda (skipped_missing_target)
+  - trolepr (skipped_missing_target)
+  - trolwfd (skipped_missing_target)
+  - trsstr (skipped_missing_target)
+  - tsbjent (skipped_missing_target)
+  - tsrchrt (skipped_missing_target)
+  - tsitin (skipped_missing_target)
+  - tsrchkw (skipped_missing_target)
+  - tsbjspa (skipped_missing_target)
+  - tteams (skipped_missing_target)
+  - tsredpd (skipped_missing_target)
+  - tteart (skipped_missing_target)
+  - ttemrt (skipped_missing_target)
+  - ttrgobj (skipped_missing_target)
+  - ttrgort (skipped_missing_target)
+  - tvdcamt (skipped_missing_target)
+  - ttxrirt (skipped_missing_target)
+  - ttxrisu (skipped_missing_target)
+  - tuserdl (skipped_missing_target)
+  - twfaaa (skipped_missing_target)
+  - tuserrt (skipped_missing_target)
+  - tusers (skipped_missing_target)
+  - tvwact (skipped_missing_target)
+  - tusrdlr (skipped_missing_target)
+  - tviewas (skipped_missing_target)
+  - tview (skipped_missing_target)
+  - tvpc (skipped_missing_target)
+  - twfasta (skipped_missing_target)
+  - twfaar (skipped_missing_target)
+  - twfasg (skipped_missing_target)
+  - twfasrt (skipped_missing_target)
+  - twfass (skipped_missing_target)
+  - twfattr (skipped_missing_target)
+  - twfdacv (skipped_missing_target)
+  - twfdart_tmp (skipped_missing_target)
+  - twfdacv_tmp (skipped_missing_target)
+  - twfpaa (skipped_missing_target)
+  - twfold (skipped_missing_target)
+  - twflow (skipped_missing_target)
+  - twfdawf_tmp (skipped_missing_target)
+  - twfuac (skipped_missing_target)
+  - twfsta (skipped_missing_target)
+  - twfdawf (skipped_missing_target)
+  - twfsbj (skipped_missing_target)
+  - twfort (skipped_missing_target)
+  - twfrfm (skipped_missing_target)
+  - twidfrm (skipped_missing_target)
+  - twidfat (skipped_missing_target)
+  - twidfas (skipped_missing_target)
+  - twidef (skipped_missing_target)
+  - twiasg (skipped_missing_target)
+  - twiass (skipped_missing_target)
+  - twidfac (skipped_missing_target)
+  - twifup (skipped_missing_target)
+  - twista (skipped_missing_target)
+  - twirvwr (skipped_missing_target)
+  - twilck (skipped_missing_target)
+  - twilob (skipped_missing_target)
+  - twpdsas (skipped_missing_target)
+  - twpdele (skipped_missing_target)
+  - twitem (skipped_missing_target)
+  - twidfvw (skipped_missing_target)
+  - twpdssl (skipped_missing_target)
+  - twitrt (skipped_missing_target)
+  - twpdef (skipped_missing_target)
+  - twpdsec (skipped_missing_target)
+  - twpdscm (skipped_missing_target)
+  - twpdsde (skipped_missing_target)
+  - twpistn (skipped_missing_target)
+  - twpissi (skipped_missing_target)
+  - twpdsed (skipped_missing_target)
+  - twpisec (skipped_missing_target)
+  - twpdsel (skipped_missing_target)
+  - twpiscm (skipped_missing_target)
+  - twpisde (skipped_missing_target)
+  - twrkrsa (skipped_missing_target)
+  - twrkref (skipped_missing_target)
+  - twrkras (skipped_missing_target)
+  - twrkrar (skipped_missing_target)
+  - twrkins (skipped_missing_target)
+  - twrkdsa (skipped_missing_target)
+
+Failed tables:
+  - tcasevt ([INCOMPATIBLE_DATA_FOR_TABLE.CANNOT_FIND_DATA] Cannot write incompatible data for the table `spark_catalog`.`test_kg01_bronze_bsmt1_gluedb`.`tcasevt`: Cannot find data for the output column `case_evnt_hld_xdt`.)
+  - tcascoe (org.apache.hadoop.hive.ql.metadata.HiveException: Unable to fetch table tcascoe. Unable to get table: java.lang.IllegalArgumentException: No enum constant org.apache.hadoop.hive.metastore.TableType.)
+  - tcasias (org.apache.hadoop.hive.ql.metadata.HiveException: Unable to fetch table tcasias. Unable to get table: java.lang.IllegalArgumentException: No enum constant org.apache.hadoop.hive.metastore.TableType.)
+  - tdbmigr ([INSERT_COLUMN_ARITY_MISMATCH.TOO_MANY_DATA_COLUMNS] Cannot write to `spark_catalog`.`test_kg01_bronze_bsmt1_gluedb`.`tdbmigr`, the reason is too many data columns:
+Table columns: `tbl_nm`, `src_alt_id`, `src_witm_alt_id`, `src_id`, `src_witm_id`, `trgt_id`, `src_dbnm`, `src_xtrc_tstmp`, `trgt_lod_dt`, `trk_tstmp`, `trk_uid`.
+Data columns: `TBL_NM`, `SRC_ALT_ID`, `SRC_WITM_ALT_ID`, `SRC_ID`, `SRC_WITM_ID`, `TRGT_ID`, `TRGT_WITM_ID`, `SRC_DBNM`, `SRC_XTRC_TSTMP`, `TRGT_LOD_DT`, `TRK_TSTMP`, `TRK_UID`.)
+
+
+--
+If you wish to stop receiving notifications from this topic, please click or visit the link below to unsubscribe:
+https://can01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsns.ca-central-1.amazonaws.com%2Funsubscribe-v2.html%3FSubscriptionArn%3Darn%3Aaws%3Asns%3Aca-central-1%3A428904953989%3Atest-kg01-bsmt-topic%3Adc38a831-cbad-4991-b052-55b29434e94d%26Endpoint%3DPDPPRODATAG%40cra-arc.gc.ca&data=05%7C02%7CPDPPRODATAG%40cra-arc.gc.ca%7C8c8086f264a84ca72a2a08df3a91f03c%7C4ca51fed92c44f5494c5dcc41cbf1c9e%7C0%7C0%7C639294070639241991%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=B5GIlj9Mf2w71QLcjRc%2FZteUtQ4EGdo3Kao%2BLo%2FgSUY%3D&reserved=0
+
+Please do not reply directly to this email. If you have any questions or comments regarding this email, please contact us at https://can01.safelinks.protection.outlook.com/?url=https%3A%2F%2Faws.amazon.com%2Fsupport&data=05%7C02%7CPDPPRODATAG%40cra-arc.gc.ca%7C8c8086f264a84ca72a2a08df3a91f03c%7C4ca51fed92c44f5494c5dcc41cbf1c9e%7C0%7C0%7C639294070639254165%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=uOEwCCRR69Vwnk8r3dMWtvC3sfUtYEHEu9ETnctv%2FQ4%3D&reserved=0
