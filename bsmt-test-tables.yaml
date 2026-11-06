@@ -1,0 +1,3378 @@
+Conditions:
+  IsTest: !Equals [!Ref Environment, "test"]
+
+###############################################################################
+# TEST-ONLY BSMT TABLES
+# Additional target tables for the TEST environment
+###############################################################################
+
+#######################################
+# 173- Glue Iceberg Table TRMDFRL
+#######################################
+  GlueTableTRMDFRL:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "trmdfrl table description"
+        Name: "trmdfrl"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/trmdfrl/"
+          Columns:
+            - Name: DOC_DEF_NM
+              Type: string
+            - Name: DOC_DEF_VERS_NBR
+              Type: int
+            - Name: ROLE_ID
+              Type: string
+            - Name: ACCS_TCD
+              Type: string
+            - Name: DOC_DEF_ROLE_EDT
+              Type: date
+            - Name: DOC_DEF_ROLE_XDT
+              Type: date
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 174- Glue Iceberg Table TRMDFVW
+#######################################
+  GlueTableTRMDFVW:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "trmdfvw table description"
+        Name: "trmdfvw"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/trmdfvw/"
+          Columns:
+            - Name: DOC_DEF_NM
+              Type: string
+            - Name: DOC_DEF_VERS_NBR
+              Type: int
+            - Name: VW_NM
+              Type: string
+            - Name: VW_VERS_NBR
+              Type: int
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 175- Glue Iceberg Table TROLWDA
+#######################################
+  GlueTableTROLWDA:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "trolwda table description"
+        Name: "trolwda"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/trolwda/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_DEF_ID
+              Type: int
+            - Name: ROLE_ID
+              Type: int
+            - Name: ASSOC_WFLDR_DEF_ID
+              Type: int
+            - Name: ASSOC_ROLE_ID
+              Type: int
+            - Name: ROLE_WFLDR_DEF_ASSOC_SQNBR
+              Type: int
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: BASE_WFL_BYPS_IND
+              Type: string
+            - Name: WFL_TY_ID
+              Type: int
+            - Name: ASSOC_WFL_TY_ID
+              Type: int
+
+#######################################
+# 176- Glue Iceberg Table TSBJENT
+#######################################
+  GlueTableTSBJENT:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tsbjent table description"
+        Name: "tsbjent"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tsbjent/"
+          Columns:
+            - Name: SOI_ENTY_ID
+              Type: int
+            - Name: SOI_ENTY_RSLN_TCD
+              Type: string
+            - Name: SOI_ENTY_PRIM_ID
+              Type: int
+            - Name: TRK_UID
+              Type: string
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+
+#######################################
+# 177- Glue Iceberg Table TSBJSPA
+#######################################
+  GlueTableTSBJSPA:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tsbjspa table description"
+        Name: "tsbjspa"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tsbjspa/"
+          Columns:
+            - Name: SOI_ENTY_ID
+              Type: int
+            - Name: DELE_ID
+              Type: int
+            - Name: SOI_ENTY_ATTR_SQNBR
+              Type: int
+            - Name: SOI_ENTY_ATTR_CD
+              Type: string
+            - Name: SOI_ENTY_ATTR_DCML
+              Type: decimal(15,2)
+            - Name: SOI_ENTY_ATTR_DT
+              Type: date
+            - Name: SOI_ENTY_ATTR_TXT
+              Type: string
+            - Name: SOI_ENTY_ATTR_EDTTM
+              Type: timestamp
+            - Name: SOI_ENTY_ATTR_XDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+
+#######################################
+# 178- Glue Iceberg Table TSITIN
+#######################################
+  GlueTableTSITIN:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tsitin table description"
+        Name: "tsitin"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tsitin/"
+          Columns:
+            - Name: SITIN_ID
+              Type: int
+            - Name: SITIN_NBR
+              Type: int
+            - Name: SITIN_VERS_NBR
+              Type: int
+            - Name: RENCN_AGRMNT_TOT_AMT
+              Type: decimal(15,2)
+            - Name: RENCN_AGRMNT_TOT_INVST
+              Type: int
+            - Name: RENCN_AGRMNT_TOT_PRTNR
+              Type: int
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: SQLID
+              Type: string
+            - Name: OPCODE
+              Type: string
+
+#######################################
+# 179- Glue Iceberg Table TSRCHKW
+#######################################
+  GlueTableTSRCHKW:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tsrchkw table description"
+        Name: "tsrchkw"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tsrchkw/"
+          Columns:
+            - Name: SRCH_KW
+              Type: string
+            - Name: SRCH_TCD
+              Type: string
+            - Name: SRCH_RLT_ID
+              Type: int
+            - Name: SQNBR
+              Type: int
+            - Name: TRK_UID
+              Type: string
+            - Name: TRK_TSTMP
+              Type: timestamp
+
+#######################################
+# 180- Glue Iceberg Table TSRCHRT
+#######################################
+  GlueTableTSRCHRT:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tsrchrt table description"
+        Name: "tsrchrt"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tsrchrt/"
+          Columns:
+            - Name: SRCH_RLT_ID
+              Type: int
+            - Name: TRK_UID
+              Type: string
+            - Name: TRK_TSTMP
+              Type: timestamp
+
+#######################################
+# 181- Glue Iceberg Table TSREDPD
+#######################################
+  GlueTableTSREDPD:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tsredpd table description"
+        Name: "tsredpd"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tsredpd/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: FP_ID
+              Type: int
+            - Name: IDX_NBR
+              Type: int
+            - Name: LDDTTM
+              Type: timestamp
+            - Name: TITL_TXT
+              Type: string
+            - Name: SRED_PRJ_CSTAMT
+              Type: decimal(15,0)
+            - Name: UNSB_WRK_CSTAMT
+              Type: decimal(15,0)
+            - Name: ACPT_FIL_WRK_CSTAMT
+              Type: decimal(15,0)
+            - Name: INELG_WRK_COST_AMT
+              Type: decimal(15,0)
+            - Name: ORSN_INELG_WK_CSTAMT
+              Type: decimal(15,0)
+            - Name: AP_ITA_SCT_FRE_REF_TXT
+              Type: string
+            - Name: PEN_IND
+              Type: string
+            - Name: OTH_RSK_ISU_IND
+              Type: string
+            - Name: ISU_BRF_DESC
+              Type: string
+            - Name: ELG_DTRM_RSLT_CD
+              Type: string
+            - Name: CDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 182- Glue Iceberg Table TTRGOBJ
+#######################################
+  GlueTableTTRGOBJ:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "ttrgobj table description"
+        Name: "ttrgobj"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/ttrgobj/"
+          Columns:
+            - Name: EXRL_TRGR_OBJ_ID
+              Type: int
+            - Name: EXRL_TRGR_ETM
+              Type: string
+            - Name: EXRL_TRGR_EDT
+              Type: date
+            - Name: EXRL_TRGR_CDTTM
+              Type: timestamp
+            - Name: EXRL_TRGR_TCD
+              Type: string
+            - Name: EXRL_TRGR_RCV_DTTM
+              Type: timestamp
+            - Name: EXRL_TRGR_DESC
+              Type: string
+            - Name: EXRL_TRGR_SRC_DESC
+              Type: string
+            - Name: REQ_TCD
+              Type: string
+            - Name: EXRL_TRGR_REF_ID
+              Type: string
+            - Name: EXRL_TRGR_XDT
+              Type: date
+            - Name: EXRL_TRGR_XTM
+              Type: string
+            - Name: EXRL_TRGR_LDDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: EXRL_TRGR_SUPP_REF_ID
+              Type: string
+
+#######################################
+# 183- Glue Iceberg Table TTRGORT
+#######################################
+  GlueTableTTRGORT:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "ttrgort table description"
+        Name: "ttrgort"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/ttrgort/"
+          Columns:
+            - Name: EXRL_TRGR_OBJ_ID
+              Type: int
+            - Name: EXRL_TRGR_OBJ_ROOT_CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 184- Glue Iceberg Table TTXRIRT
+#######################################
+  GlueTableTTXRIRT:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "ttxrirt table description"
+        Name: "ttxrirt"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/ttxrirt/"
+          Columns:
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: FP_ID
+              Type: int
+            - Name: RSK_ISU_ID
+              Type: int
+            - Name: TX_RTN_ISU_ROOT_CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 185- Glue Iceberg Table TTXRISU
+#######################################
+  GlueTableTTXRISU:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "ttxrisu table description"
+        Name: "ttxrisu"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/ttxrisu/"
+          Columns:
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: FP_ID
+              Type: int
+            - Name: RSK_ISU_ID
+              Type: int
+            - Name: TX_RTN_ISU_ETM
+              Type: string
+            - Name: TX_RTN_ISU_EDT
+              Type: date
+            - Name: TX_RTN_ISU_CDTTM
+              Type: timestamp
+            - Name: SRC_DATA_XTRC_DTTM
+              Type: timestamp
+            - Name: TX_RTN_ISU_RSK_AMT
+              Type: decimal(15,2)
+            - Name: TX_RTN_ISU_RSK_LVCD
+              Type: string
+            - Name: TX_RTN_ISU_XDT
+              Type: date
+            - Name: TX_RTN_ISU_XTM
+              Type: string
+            - Name: TX_RTN_ISU_LDDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 186- Glue Iceberg Table TVDCAMT
+#######################################
+  GlueTableTVDCAMT:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tvdcamt table description"
+        Name: "tvdcamt"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tvdcamt/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: VLNTR_DSCLS_PGM_PRJ_CD
+              Type: string
+            - Name: EDT
+              Type: date
+            - Name: ETM
+              Type: string
+            - Name: CDTTM
+              Type: timestamp
+            - Name: XDT
+              Type: date
+            - Name: XTM
+              Type: string
+            - Name: TRK_UID
+              Type: string
+            - Name: ESTM_NI_INCR_CALC_AMT
+              Type: decimal(10,0)
+            - Name: ESTM_PROV_TX_INCR_CALC_AMT
+              Type: decimal(10,0)
+            - Name: ESTM_PEN_WVR_CALC_AMT
+              Type: decimal(10,0)
+            - Name: ESTM_INT_WVR_CALC_AMT
+              Type: decimal(10,0)
+            - Name: ESTM_FED_TX_INCR_CALC_AMT
+              Type: decimal(10,0)
+            - Name: LDDTTM
+              Type: timestamp
+
+#######################################
+# 187- Glue Iceberg Table TVIEW
+#######################################
+  GlueTableTVIEW:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tview table description"
+        Name: "tview"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tview/"
+          Columns:
+            - Name: VW_ID
+              Type: int
+            - Name: VW_VERS_NBR
+              Type: int
+            - Name: VW_NM
+              Type: string
+            - Name: VW_TCD
+              Type: string
+            - Name: VW_MIME
+              Type: string
+            - Name: VW_ENG_LBL
+              Type: string
+            - Name: VW_FR_LBL
+              Type: string
+            - Name: VW_EDESC
+              Type: string
+            - Name: VW_FDESC
+              Type: string
+            - Name: VW_SHRT_EDESC
+              Type: string
+            - Name: VW_SHRT_FDESC
+              Type: string
+            - Name: VW_SRVC_BINDING_CHARCS
+              Type: string
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: WRK_EVNT_CNTXT_TCD
+              Type: string
+            - Name: WRK_EVNT_CNTXT_EDESC
+              Type: string
+            - Name: WRK_EVNT_CNTXT_FDESC
+              Type: string
+            - Name: VW_ENG_MNIC
+              Type: string
+            - Name: VW_FR_MNIC
+              Type: string
+            - Name: VW_ENG_ACCS_NM
+              Type: string
+            - Name: VW_FR_ACCS_NM
+              Type: string
+            - Name: VW_ENG_TLTP_TXT
+              Type: string
+            - Name: VW_FR_TLTP_TXT
+              Type: string
+            - Name: VW_TY_NM
+              Type: string
+            - Name: ICON_NM
+              Type: string
+
+#######################################
+# 188- Glue Iceberg Table TVIEWAS
+#######################################
+  GlueTableTVIEWAS:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tviewas table description"
+        Name: "tviewas"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tviewas/"
+          Columns:
+            - Name: VW_ID
+              Type: int
+            - Name: VW_VERS_NBR
+              Type: int
+            - Name: ASSOC_VW_ID
+              Type: int
+            - Name: ASSOC_VW_VERS_NBR
+              Type: int
+            - Name: VW_ASSOC_TCD
+              Type: string
+            - Name: VW_ASSOC_SRT_SQNBR
+              Type: int
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 189- Glue Iceberg Table TVPC
+#######################################
+  GlueTableTVPC:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tvpc table description"
+        Name: "tvpc"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tvpc/"
+          Columns:
+            - Name: LOB_CASE_ID
+              Type: string
+            - Name: CVDP_CDTTM
+              Type: timestamp
+            - Name: ROW_NUM
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: PGM_ID
+              Type: string
+            - Name: PGM_ACCT_SQNBR
+              Type: int
+            - Name: CLT_ACCT_TCD
+              Type: string
+            - Name: CASE_CCD
+              Type: string
+            - Name: CASE_CPLXCD
+              Type: string
+            - Name: CASE_OFCID
+              Type: int
+            - Name: CASE_PRIM_OFFID
+              Type: string
+            - Name: VD_DT
+              Type: timestamp
+            - Name: VD_INTK_CNTR_RCVDT
+              Type: date
+            - Name: CASE_SCD
+              Type: string
+            - Name: ACTVT_TCD
+              Type: string
+            - Name: RTN_TCD
+              Type: string
+            - Name: SB_RTN_TCD
+              Type: string
+            - Name: VD_TCD
+              Type: string
+            - Name: VD_ERLST_YR
+              Type: int
+            - Name: VD_LTST_YR
+              Type: int
+            - Name: VD_RVW_REQ_LVCD
+              Type: string
+            - Name: VD_DCSNCD
+              Type: string
+            - Name: CASE_DISP_OFCRID
+              Type: string
+            - Name: CASE_DISPDT
+              Type: timestamp
+            - Name: VD_ASS_YR_CNT
+              Type: int
+            - Name: TRK_UID
+              Type: string
+            - Name: TRK_TSTMP
+              Type: timestamp
+
+#######################################
+# 190- Glue Iceberg Table TVWACT
+#######################################
+  GlueTableTVWACT:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tvwact table description"
+        Name: "tvwact"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tvwact/"
+          Columns:
+            - Name: VW_ID
+              Type: int
+            - Name: VW_VERS_NBR
+              Type: int
+            - Name: ACTN_DEF_ID
+              Type: int
+            - Name: ACTN_DEF_VERS_NBR
+              Type: int
+            - Name: ACTN_ORD_NBR
+              Type: int
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 191- Glue Iceberg Table TWFAAA
+#######################################
+  GlueTableTWFAAA:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfaaa table description"
+        Name: "twfaaa"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfaaa/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: FP_ID
+              Type: int
+            - Name: WRK_VERS_NBR
+              Type: int
+            - Name: DELE_ID
+              Type: int
+            - Name: CASE_ACCT_PRD_DELE_SQNBR
+              Type: int
+            - Name: DELE_VAL_SQNBR
+              Type: int
+            - Name: PACCT_DELE_AALOC_SQNBR
+              Type: int
+            - Name: DELE_AALOC_PTNR_TPACCT_ID
+              Type: int
+            - Name: DELE_ADJ_ALOC_EXCL_RCD
+              Type: string
+            - Name: DELE_AALOC_PACCT_OINT_PCT
+              Type: decimal(8,5)
+            - Name: DELE_PTNR_FXD_ADJ_ALOC_AMT
+              Type: decimal(15,2)
+            - Name: DELE_PACCT_AALOC_PCT
+              Type: decimal(8,5)
+            - Name: DELE_PTNR_AALOC_PRCS_SCD
+              Type: string
+            - Name: ACCT_AALOC_TMPLT_USE_IND
+              Type: string
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 192- Glue Iceberg Table TWFAAR
+#######################################
+  GlueTableTWFAAR:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfaar table description"
+        Name: "twfaar"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfaar/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: FP_ID
+              Type: int
+            - Name: WRK_VERS_NBR
+              Type: int
+            - Name: DELE_ID
+              Type: int
+            - Name: CASE_ACCT_PRD_DELE_SQNBR
+              Type: int
+            - Name: DELE_VAL_SQNBR
+              Type: int
+            - Name: CASE_AFP_DEADJ_RLTN_SQNBR
+              Type: int
+            - Name: RLT_CASE_AREA_ID
+              Type: int
+            - Name: RLT_WFLDR_ID
+              Type: int
+            - Name: RLT_CMPL_TBR_ID
+              Type: int
+            - Name: RLT_FP_ID
+              Type: int
+            - Name: RLT_WRK_VERS_NBR
+              Type: int
+            - Name: RLT_DELE_ID
+              Type: int
+            - Name: RLT_CASE_APDE_SQNBR
+              Type: int
+            - Name: RLT_DELE_VAL_SQNBR
+              Type: int
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 193- Glue Iceberg Table TWFASG
+#######################################
+  GlueTableTWFASG:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfasg table description"
+        Name: "twfasg"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfasg/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WFLDR_ASGN_SQNBR
+              Type: int
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: WFLDR_ASGN_TCD
+              Type: string
+            - Name: RSRC_ID
+              Type: int
+            - Name: WFLDR_ACTL_WRK_HR
+              Type: decimal(8,2)
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: WRK_ASGN_RCD
+              Type: string
+            - Name: WFLDR_ASGN_EDTTM
+              Type: timestamp
+            - Name: WFLDR_ASGN_XDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+
+#######################################
+# 194- Glue Iceberg Table TWFASRT
+#######################################
+  GlueTableTWFASRT:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfasrt table description"
+        Name: "twfasrt"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfasrt/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: ASSOC_CASE_AREA_ID
+              Type: int
+            - Name: ASSOC_WFLDR_ID
+              Type: int
+            - Name: WFLDR_ASSOC_TCD
+              Type: string
+            - Name: WFLDR_ASSOC_ROOT_CDTTM
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 195- Glue Iceberg Table TWFASS
+#######################################
+  GlueTableTWFASS:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfass table description"
+        Name: "twfass"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfass/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: ASSOC_CASE_AREA_ID
+              Type: int
+            - Name: ASSOC_WFLDR_ID
+              Type: int
+            - Name: WFLDR_ASSOC_EDT
+              Type: date
+            - Name: WFLDR_ASSOC_ETM
+              Type: string
+            - Name: WFLDR_ASSOC_CDTTM
+              Type: timestamp
+            - Name: WFLDR_ASSOC_TCD
+              Type: string
+            - Name: WFLDR_ASSOC_XDT
+              Type: date
+            - Name: WFLDR_ASSOC_XTM
+              Type: string
+            - Name: LDDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 196- Glue Iceberg Table TWFASTA
+#######################################
+  GlueTableTWFASTA:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfasta table description"
+        Name: "twfasta"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfasta/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: ASSOC_CASE_AREA_ID
+              Type: int
+            - Name: ASSOC_WFLDR_ID
+              Type: int
+            - Name: WFLDR_ASSOC_TCD
+              Type: string
+            - Name: WFLDR_ASSOC_STUS_EDTTM
+              Type: timestamp
+            - Name: WFLDR_ASSOC_STUS_XDTTM
+              Type: timestamp
+            - Name: WFLDR_ASSOC_SCD
+              Type: string
+            - Name: WFLDR_ASSOC_STUS_RCD
+              Type: string
+            - Name: TRK_UID
+              Type: string
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+
+#######################################
+# 197- Glue Iceberg Table TWFATTR
+#######################################
+  GlueTableTWFATTR:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfattr table description"
+        Name: "twfattr"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfattr/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WFLDR_ATTR_TCD
+              Type: string
+            - Name: WFLDR_ATTR_CD
+              Type: string
+            - Name: WFLDR_ATTR_SQNBR
+              Type: int
+            - Name: WFLDR_ATTR_VAL_TXT
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: LD_IND
+              Type: string
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 198- Glue Iceberg Table TWFDACV
+#######################################
+  GlueTableTWFDACV:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfdacv table description"
+        Name: "twfdacv"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfdacv/"
+          Columns:
+            - Name: ACTVT_TY_ID
+              Type: int
+            - Name: WFLDR_DEF_ID
+              Type: int
+            - Name: WFLDR_DEF_ACTVT_TY_SQNBR
+              Type: int
+            - Name: EDT
+              Type: date
+            - Name: ETM
+              Type: string
+            - Name: CDTTM
+              Type: timestamp
+            - Name: XDT
+              Type: date
+            - Name: XTM
+              Type: string
+            - Name: LDDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: WITM_DEF_ID
+              Type: int
+            - Name: WFL_TY_ID
+              Type: int
+
+#######################################
+# 199- Glue Iceberg Table TWFLOW
+#######################################
+  GlueTableTWFLOW:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twflow table description"
+        Name: "twflow"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twflow/"
+          Columns:
+            - Name: WFL_TY_ID
+              Type: int
+            - Name: WFL_TY_ALT_ID
+              Type: string
+            - Name: WFL_TY_ENM
+              Type: string
+            - Name: WFL_TY_FNM
+              Type: string
+            - Name: WFL_TY_SDT
+              Type: date
+            - Name: WFL_TY_NDT
+              Type: date
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 200- Glue Iceberg Table TWFOLD
+#######################################
+  GlueTableTWFOLD:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfold table description"
+        Name: "twfold"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfold/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: WFLDR_TCD
+              Type: string
+            - Name: WFLDR_DESC
+              Type: string
+            - Name: WFLDR_ACTL_SDT
+              Type: date
+            - Name: WFLDR_ACTL_NDT
+              Type: date
+            - Name: WFLDR_BUS_CDTTM
+              Type: timestamp
+            - Name: WFLDR_CRT_RCD
+              Type: string
+            - Name: WFLDR_ORIG_SRC_CD
+              Type: string
+            - Name: WFLDR_CRT_BY_UID
+              Type: string
+            - Name: WFLDR_PRTY_CD
+              Type: string
+            - Name: EXPC_DU_DT
+              Type: date
+            - Name: LANG_CD
+              Type: string
+            - Name: WFLDR_DEF_ID
+              Type: int
+            - Name: WFLDR_DEF_VERS_NBR
+              Type: int
+            - Name: BP_MGR_PRCS_ISTNC_ID
+              Type: int
+            - Name: WFLDR_CPLX_LVCD
+              Type: string
+            - Name: CMPL_CASE_INTR_ORD_NBR
+              Type: string
+            - Name: CMPL_CASE_SELN_QRY_ID
+              Type: int
+            - Name: AUDC_TCD
+              Type: string
+            - Name: AUD_ACTN_TCD
+              Type: string
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: INDST_CD
+              Type: string
+            - Name: INC_CCD
+              Type: string
+            - Name: CASE_RSK_LVCD
+              Type: string
+            - Name: WRKLD_ORIG_LOC_CD
+              Type: string
+            - Name: WFLDR_CCD
+              Type: string
+            - Name: WRK_OTCM_CD
+              Type: string
+            - Name: WFLDR_APRVR_UID
+              Type: string
+            - Name: CASE_APRV_DT
+              Type: date
+            - Name: EMAIL_TP_RSK_ACPT_CD
+              Type: string
+            - Name: WFLDR_EDTTM
+              Type: timestamp
+            - Name: WFLDR_XDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+
+#######################################
+# 201- Glue Iceberg Table TWFORT
+#######################################
+  GlueTableTWFORT:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfort table description"
+        Name: "twfort"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfort/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WFLDR_ROOT_CDTTM
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 202- Glue Iceberg Table TWFPAA
+#######################################
+  GlueTableTWFPAA:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfpaa table description"
+        Name: "twfpaa"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfpaa/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: FP_ID
+              Type: int
+            - Name: PTNRP_ACCT_AALOC_SQNBR
+              Type: int
+            - Name: PTNRP_AALOC_PTNR_TPACCT_ID
+              Type: int
+            - Name: PTNRP_AALOC_EXCL_RCD
+              Type: string
+            - Name: PTNRP_AALOC_ACCT_OINT_PCT
+              Type: decimal(8,5)
+            - Name: PTNRP_AALOC_FXD_AALOC_AMT
+              Type: decimal(15,2)
+            - Name: PTNRP_AALOC_ACCT_AALOC_PCT
+              Type: decimal(8,5)
+            - Name: PTNRP_AALOC_PRCS_SCD
+              Type: string
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: AALOC_NVLD_PTNR_TPACCT_ID
+              Type: string
+            - Name: PTNRP_ADJ_ALLOC_PTNR_NM
+              Type: string
+            - Name: PTNRP_ADJ_ALLOC_NT_TXT
+              Type: string
+
+#######################################
+# 203- Glue Iceberg Table TWFRFM
+#######################################
+  GlueTableTWFRFM:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfrfm table description"
+        Name: "twfrfm"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfrfm/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: CASE_DOC_SQNBR
+              Type: int
+            - Name: ECM_REF_NBR
+              Type: string
+            - Name: ECM_REF_VERS_NBR
+              Type: double
+            - Name: WITM_NBR
+              Type: int
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: DOC_USE_TCD
+              Type: string
+
+#######################################
+# 204- Glue Iceberg Table TWFSBJ
+#######################################
+  GlueTableTWFSBJ:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfsbj table description"
+        Name: "twfsbj"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfsbj/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: SBJCT_OF_INT_SQNBR
+              Type: int
+            - Name: WFLDR_SBJCT_OF_INT_EDT
+              Type: date
+            - Name: WFLDR_SBJCT_OF_INT_ETM
+              Type: string
+            - Name: WFLDR_SBJCT_OF_INT_CDTTM
+              Type: timestamp
+            - Name: PRIM_SBJCT_OF_INT_IND
+              Type: string
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: GEO_AREA_CD
+              Type: string
+            - Name: WFLDR_SBJCT_OF_INT_XDT
+              Type: date
+            - Name: WFLDR_SBJCT_OF_INT_XTM
+              Type: string
+            - Name: LDDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: SBJCT_OF_INT_TCD
+              Type: string
+            - Name: SBJCT_OF_INT_REF
+              Type: string
+            - Name: SOI_ENTY_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: SRCH_RLT_ID
+              Type: int
+
+#######################################
+# 205- Glue Iceberg Table TWFSTA
+#######################################
+  GlueTableTWFSTA:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfsta table description"
+        Name: "twfsta"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfsta/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: WFLDR_SYS_SCD
+              Type: string
+            - Name: WFLDR_SCD
+              Type: string
+            - Name: WFLDR_STUS_RCD
+              Type: string
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: WFLDR_STUS_EDTTM
+              Type: timestamp
+            - Name: WFLDR_STUS_XDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+
+#######################################
+# 206- Glue Iceberg Table TWFUAC
+#######################################
+  GlueTableTWFUAC:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twfuac table description"
+        Name: "twfuac"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twfuac/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: UID
+              Type: string
+            - Name: WFLDR_ACCS_DTTM
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 207- Glue Iceberg Table TWIASG
+#######################################
+  GlueTableTWIASG:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twiasg table description"
+        Name: "twiasg"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twiasg/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: WITM_ASGN_SQNBR
+              Type: int
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: WITM_ASGN_TCD
+              Type: string
+            - Name: RSRC_ID
+              Type: int
+            - Name: WITM_ACTL_WRK_HR
+              Type: decimal(8,2)
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: WRK_ASGN_RCD
+              Type: string
+            - Name: WITM_ASGN_EDTTM
+              Type: timestamp
+            - Name: WITM_ASGN_XDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+
+#######################################
+# 208- Glue Iceberg Table TWIASS
+#######################################
+  GlueTableTWIASS:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twiass table description"
+        Name: "twiass"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twiass/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: ASSOC_WITM_NBR
+              Type: int
+            - Name: WITM_ASSOC_EDT
+              Type: date
+            - Name: WITM_ASSOC_ETM
+              Type: string
+            - Name: WITM_ASSOC_CDTTM
+              Type: timestamp
+            - Name: WITM_ASSOC_TCD
+              Type: string
+            - Name: WITM_ASSOC_XDT
+              Type: date
+            - Name: WITM_ASSOC_XTM
+              Type: string
+            - Name: LDDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 209- Glue Iceberg Table TWIDEF
+#######################################
+  GlueTableTWIDEF:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twidef table description"
+        Name: "twidef"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twidef/"
+          Columns:
+            - Name: WITM_DEF_ID
+              Type: int
+            - Name: WITM_DEF_VERS_NBR
+              Type: int
+            - Name: WITM_DEF_SRT_SQNBR
+              Type: int
+            - Name: WITM_DEF_ALT_ID
+              Type: string
+            - Name: WITM_DEF_EDESC
+              Type: string
+            - Name: WITM_DEF_FDESC
+              Type: string
+            - Name: WITM_DEF_TCD
+              Type: string
+            - Name: WITM_DEF_CCD
+              Type: string
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: WRK_EVNT_CNTXT_TCD
+              Type: string
+            - Name: WRK_EVNT_CNTXT_EDESC
+              Type: string
+            - Name: WRK_EVNT_CNTXT_FDESC
+              Type: string
+            - Name: WITM_ENG_MNIC
+              Type: string
+            - Name: WITM_FR_MNIC
+              Type: string
+            - Name: WITM_ENG_ACCS_NM
+              Type: string
+            - Name: WITM_FR_ACCS_NM
+              Type: string
+            - Name: WITM_ENG_TLTP_TXT
+              Type: string
+            - Name: WITM_FR_TLTP_TXT
+              Type: string
+            - Name: ICON_NM
+              Type: string
+
+#######################################
+# 210- Glue Iceberg Table TWIDFAC
+#######################################
+  GlueTableTWIDFAC:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twidfac table description"
+        Name: "twidfac"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twidfac/"
+          Columns:
+            - Name: WITM_DEF_ID
+              Type: int
+            - Name: WITM_DEF_VERS_NBR
+              Type: int
+            - Name: ACTN_DEF_ID
+              Type: int
+            - Name: ACTN_DEF_VERS_NBR
+              Type: int
+            - Name: ACTN_ORD_NBR
+              Type: int
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 211- Glue Iceberg Table TWIDFAS
+#######################################
+  GlueTableTWIDFAS:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twidfas table description"
+        Name: "twidfas"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twidfas/"
+          Columns:
+            - Name: WITM_DEF_ID
+              Type: int
+            - Name: WITM_DEF_VERS_NBR
+              Type: int
+            - Name: ASSOC_WITM_DEF_ID
+              Type: int
+            - Name: ASSOC_WITM_DEF_VERS_NBR
+              Type: int
+            - Name: WITM_ASSOC_TCD
+              Type: string
+            - Name: WITM_DEF_SRT_SQNBR
+              Type: int
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 212- Glue Iceberg Table TWIDFAT
+#######################################
+  GlueTableTWIDFAT:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twidfat table description"
+        Name: "twidfat"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twidfat/"
+          Columns:
+            - Name: WITM_DEF_ID
+              Type: int
+            - Name: WITM_DEF_VERS_NBR
+              Type: int
+            - Name: ATTR_NM
+              Type: string
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 213- Glue Iceberg Table TWIDFRM
+#######################################
+  GlueTableTWIDFRM:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twidfrm table description"
+        Name: "twidfrm"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twidfrm/"
+          Columns:
+            - Name: WITM_DEF_ID
+              Type: int
+            - Name: WITM_DEF_VERS_NBR
+              Type: int
+            - Name: DOC_DEF_NM
+              Type: string
+            - Name: DOC_DEF_VERS_NBR
+              Type: int
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 214- Glue Iceberg Table TWIDFVW
+#######################################
+  GlueTableTWIDFVW:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twidfvw table description"
+        Name: "twidfvw"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twidfvw/"
+          Columns:
+            - Name: WITM_DEF_ID
+              Type: int
+            - Name: WITM_DEF_VERS_NBR
+              Type: int
+            - Name: VW_ID
+              Type: int
+            - Name: VW_VERS_NBR
+              Type: int
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: WITM_DEF_VW_SRT_SQNBR
+              Type: int
+
+#######################################
+# 215- Glue Iceberg Table TWIFUP
+#######################################
+  GlueTableTWIFUP:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twifup table description"
+        Name: "twifup"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twifup/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: WITM_FUP_SQNBR
+              Type: int
+            - Name: WITM_FUP_DTTM
+              Type: timestamp
+            - Name: WITM_FUP_RCD
+              Type: string
+            - Name: WITM_FUP_ACTN_TCD
+              Type: string
+            - Name: WITM_FUP_CMPLT_IND
+              Type: string
+            - Name: WITM_FUP_CMNT_TXT
+              Type: string
+            - Name: WITM_FUP_CDTTM
+              Type: timestamp
+            - Name: LD_IND
+              Type: string
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 216- Glue Iceberg Table TWILCK
+#######################################
+  GlueTableTWILCK:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twilck table description"
+        Name: "twilck"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twilck/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: WITM_LCK_SQNBR
+              Type: int
+            - Name: EDT
+              Type: date
+            - Name: ETM
+              Type: string
+            - Name: CDTTM
+              Type: timestamp
+            - Name: WITM_LCK_SDTTM
+              Type: timestamp
+            - Name: LCK_WRKR_UID
+              Type: string
+            - Name: WITM_LCK_RCD
+              Type: string
+            - Name: WITM_LCK_NDTTM
+              Type: timestamp
+            - Name: NLOK_WRKR_UID
+              Type: string
+            - Name: WITM_NLOK_RCD
+              Type: string
+            - Name: XDT
+              Type: date
+            - Name: XTM
+              Type: string
+            - Name: LDDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 217- Glue Iceberg Table TWILOB
+#######################################
+  GlueTableTWILOB:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twilob table description"
+        Name: "twilob"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twilob/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: FLD_ID
+              Type: int
+            - Name: WITM_LOB_CDTTM
+              Type: timestamp
+            - Name: LD_IND
+              Type: string
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 218- Glue Iceberg Table TWIRVWR
+#######################################
+  GlueTableTWIRVWR:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twirvwr table description"
+        Name: "twirvwr"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twirvwr/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: RVW_RSN_RNK_NBR
+              Type: int
+            - Name: EDT
+              Type: date
+            - Name: ETM
+              Type: string
+            - Name: CDTTM
+              Type: timestamp
+            - Name: CASE_RVW_RCD
+              Type: string
+            - Name: XDT
+              Type: date
+            - Name: XTM
+              Type: string
+            - Name: LDDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 219- Glue Iceberg Table TWISTA
+#######################################
+  GlueTableTWISTA:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twista table description"
+        Name: "twista"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twista/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: WITM_SYS_SCD
+              Type: string
+            - Name: WITM_SCD
+              Type: string
+            - Name: WITM_STUS_RCD
+              Type: string
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: WITM_STUS_EDTTM
+              Type: timestamp
+            - Name: WITM_STUS_XDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+
+#######################################
+# 220- Glue Iceberg Table TWITEM
+#######################################
+  GlueTableTWITEM:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twitem table description"
+        Name: "twitem"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twitem/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: WITM_DU_DTTM
+              Type: timestamp
+            - Name: WITM_TCD
+              Type: string
+            - Name: WITM_DEF_EDESC
+              Type: string
+            - Name: WITM_DEF_FDESC
+              Type: string
+            - Name: WITM_PRTY_CD
+              Type: string
+            - Name: WITM_ACTL_SDT
+              Type: date
+            - Name: WITM_ACTL_NDT
+              Type: date
+            - Name: WITM_CDT
+              Type: date
+            - Name: WITM_CRT_BY_UID
+              Type: string
+            - Name: WITM_DEF_ID
+              Type: int
+            - Name: WITM_DEF_VERS_NBR
+              Type: int
+            - Name: BP_MGR_TSK_ISTNC_ID
+              Type: int
+            - Name: WITM_CPLX_LVCD
+              Type: string
+            - Name: WITM_SRT_SQNBR
+              Type: int
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: WITM_APRVR_UID
+              Type: string
+            - Name: WITM_APRV_DT
+              Type: date
+            - Name: WRK_OTCM_CD
+              Type: string
+            - Name: WITM_EDTTM
+              Type: timestamp
+            - Name: WITM_XDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+
+#######################################
+# 221- Glue Iceberg Table TWITRT
+#######################################
+  GlueTableTWITRT:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twitrt table description"
+        Name: "twitrt"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twitrt/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: WITM_ROOT_CDTTM
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 222- Glue Iceberg Table TWPDEF
+#######################################
+  GlueTableTWPDEF:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpdef table description"
+        Name: "twpdef"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpdef/"
+          Columns:
+            - Name: WP_DEF_ID
+              Type: int
+            - Name: WP_DEF_VERS_NBR
+              Type: int
+            - Name: JRSD_ID
+              Type: string
+            - Name: TX_TY
+              Type: string
+            - Name: BUSACV_TCD
+              Type: string
+            - Name: PRIM_DELE_ID
+              Type: int
+            - Name: WP_DEF_FR_SBJCT_LBL
+              Type: string
+            - Name: WP_DEF_ENG_SBJCT_LBL
+              Type: string
+            - Name: WP_DEF_FDESC
+              Type: string
+            - Name: WP_DEF_EDESC
+              Type: string
+            - Name: WP_DEF_EDTTM
+              Type: timestamp
+            - Name: WP_DEF_XDTTM
+              Type: timestamp
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: CRA_FRM_ID
+              Type: int
+            - Name: WP_TMPLT_NBR
+              Type: int
+
+#######################################
+# 223- Glue Iceberg Table TWPDELE
+#######################################
+  GlueTableTWPDELE:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpdele table description"
+        Name: "twpdele"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpdele/"
+          Columns:
+            - Name: WP_ELE_ID
+              Type: int
+            - Name: WP_ELE_TCD
+              Type: string
+            - Name: WP_ELE_FTXT
+              Type: string
+            - Name: WP_ELE_ETXT
+              Type: string
+            - Name: WP_ELE_EDTTM
+              Type: timestamp
+            - Name: WP_ELE_XDTTM
+              Type: timestamp
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 224- Glue Iceberg Table TWPDSAS
+#######################################
+  GlueTableTWPDSAS:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpdsas table description"
+        Name: "twpdsas"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpdsas/"
+          Columns:
+            - Name: WP_DEF_SECT_ID
+              Type: int
+            - Name: WP_DEF_SECT_VERS_NBR
+              Type: int
+            - Name: ASSOC_WP_DEF_SECT_ID
+              Type: int
+            - Name: ASSOC_WP_DEF_SECT_VERS_NBR
+              Type: int
+            - Name: WP_SECT_ORD_NBR
+              Type: int
+            - Name: WP_SECT_ASSOC_EDTTM
+              Type: timestamp
+            - Name: WP_SECT_ASSOC_XDTTM
+              Type: timestamp
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 225- Glue Iceberg Table TWPDSCM
+#######################################
+  GlueTableTWPDSCM:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpdscm table description"
+        Name: "twpdscm"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpdscm/"
+          Columns:
+            - Name: WP_DEF_SECT_ID
+              Type: int
+            - Name: WP_DEF_SECT_VERS_NBR
+              Type: int
+            - Name: WP_DEF_ECM_REF_TCD
+              Type: string
+            - Name: WP_TMPLT_ECM_REF_NBR
+              Type: string
+            - Name: WP_TMPLT_ECM_REF_VERS_NBR
+              Type: double
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 226- Glue Iceberg Table TWPDSDE
+#######################################
+  GlueTableTWPDSDE:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpdsde table description"
+        Name: "twpdsde"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpdsde/"
+          Columns:
+            - Name: WP_DEF_SECT_ID
+              Type: int
+            - Name: WP_DEF_SECT_VERS_NBR
+              Type: int
+            - Name: DELE_ID
+              Type: int
+            - Name: WP_SECT_DELE_ORD_NBR
+              Type: int
+            - Name: WP_SECT_DELE_EDTTM
+              Type: timestamp
+            - Name: WP_SECT_DELE_XDTTM
+              Type: timestamp
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 227- Glue Iceberg Table TWPDSEC
+#######################################
+  GlueTableTWPDSEC:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpdsec table description"
+        Name: "twpdsec"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpdsec/"
+          Columns:
+            - Name: WP_DEF_SECT_ID
+              Type: int
+            - Name: WP_DEF_SECT_VERS_NBR
+              Type: int
+            - Name: WP_SECT_TCD
+              Type: string
+            - Name: WP_DEF_SECT_FTITL
+              Type: string
+            - Name: WP_DEF_SECT_ETITL
+              Type: string
+            - Name: WP_DEF_SECT_FDESC
+              Type: string
+            - Name: WP_DEF_SECT_EDESC
+              Type: string
+            - Name: WP_DEF_SECT_EDTTM
+              Type: timestamp
+            - Name: WP_DEF_SECT_XDTTM
+              Type: timestamp
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 228- Glue Iceberg Table TWPDSED
+#######################################
+  GlueTableTWPDSED:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpdsed table description"
+        Name: "twpdsed"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpdsed/"
+          Columns:
+            - Name: WP_DEF_ID
+              Type: int
+            - Name: WP_DEF_VERS_NBR
+              Type: int
+            - Name: WP_DEF_SECT_ID
+              Type: int
+            - Name: WP_DEF_SECT_VERS_NBR
+              Type: int
+            - Name: WP_DEF_SECT_ORD_NBR
+              Type: int
+            - Name: WP_DEF_SECT_EDTTM
+              Type: timestamp
+            - Name: WP_DEF_SECT_XDTTM
+              Type: timestamp
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 229- Glue Iceberg Table TWPDSEL
+#######################################
+  GlueTableTWPDSEL:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpdsel table description"
+        Name: "twpdsel"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpdsel/"
+          Columns:
+            - Name: WP_DEF_SECT_ID
+              Type: int
+            - Name: WP_DEF_SECT_VERS_NBR
+              Type: int
+            - Name: WP_ELE_ID
+              Type: int
+            - Name: WP_SECT_ELE_ORD_NBR
+              Type: int
+            - Name: WP_SECT_ELE_EDTTM
+              Type: timestamp
+            - Name: WP_SECT_ELE_XDTTM
+              Type: timestamp
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 230- Glue Iceberg Table TWPDSSL
+#######################################
+  GlueTableTWPDSSL:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpdssl table description"
+        Name: "twpdssl"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpdssl/"
+          Columns:
+            - Name: WP_DEF_SECT_ID
+              Type: int
+            - Name: WP_DEF_SECT_VERS_NBR
+              Type: int
+            - Name: WP_DEF_SELOR_SQNBR
+              Type: int
+            - Name: SELN_PARM_CD
+              Type: string
+            - Name: SELN_SELOR_VAL_TXT
+              Type: string
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 231- Glue Iceberg Table TWPISCM
+#######################################
+  GlueTableTWPISCM:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpiscm table description"
+        Name: "twpiscm"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpiscm/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: FP_ID
+              Type: int
+            - Name: AUD_PH_CD
+              Type: string
+            - Name: AUD_PH_SQNBR
+              Type: int
+            - Name: WP_ISTNC_SQNBR
+              Type: int
+            - Name: WP_ISTNC_SECT_SQNBR
+              Type: int
+            - Name: WP_ISTNC_ECM_REF_NBR
+              Type: string
+            - Name: WP_ISTNC_ECM_REF_VERS_NBR
+              Type: double
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 232- Glue Iceberg Table TWPISDE
+#######################################
+  GlueTableTWPISDE:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpisde table description"
+        Name: "twpisde"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpisde/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: FP_ID
+              Type: int
+            - Name: AUD_PH_CD
+              Type: string
+            - Name: AUD_PH_SQNBR
+              Type: int
+            - Name: WP_ISTNC_SQNBR
+              Type: int
+            - Name: WP_ISTNC_SECT_SQNBR
+              Type: int
+            - Name: DELE_ID
+              Type: int
+            - Name: INIT_VAL_SRC_TCD
+              Type: string
+            - Name: WP_ISTNC_DELE_LBL_TXT
+              Type: string
+            - Name: DELE_RPT_AMT
+              Type: decimal(15,2)
+            - Name: DELE_RVW_AMT
+              Type: decimal(15,2)
+            - Name: DELE_REQ_AMT
+              Type: decimal(15,2)
+            - Name: DELE_RVW_RPT_DIF_AMT
+              Type: decimal(15,2)
+            - Name: DELE_RVW_REQ_DIF_AMT
+              Type: decimal(15,2)
+            - Name: DELE_RVW_NON_AMT_VAL_TXT
+              Type: string
+            - Name: DELE_REQ_NON_AMT_VAL_TXT
+              Type: string
+            - Name: DELE_RPT_NON_AMT_VAL_TXT
+              Type: string
+            - Name: DELE_RVW_REQ_DIF_VAL_TXT
+              Type: string
+            - Name: DELE_RVW_RPT_DIF_VAL_TXT
+              Type: string
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 233- Glue Iceberg Table TWPISEC
+#######################################
+  GlueTableTWPISEC:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpisec table description"
+        Name: "twpisec"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpisec/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: FP_ID
+              Type: int
+            - Name: AUD_PH_CD
+              Type: string
+            - Name: AUD_PH_SQNBR
+              Type: int
+            - Name: WP_ISTNC_SQNBR
+              Type: int
+            - Name: WP_ISTNC_SECT_SQNBR
+              Type: int
+            - Name: WP_DEF_SECT_ID
+              Type: int
+            - Name: WP_DEF_SECT_VERS_NBR
+              Type: int
+            - Name: WP_ISTNC_SECT_TXT
+              Type: string
+            - Name: TX_RTN_CMPNT_SQNBR
+              Type: int
+            - Name: WP_SECT_TCD
+              Type: string
+            - Name: APLC_PRES_TCD
+              Type: string
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 234- Glue Iceberg Table TWPISSI
+#######################################
+  GlueTableTWPISSI:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpissi table description"
+        Name: "twpissi"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpissi/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: FP_ID
+              Type: int
+            - Name: AUD_PH_CD
+              Type: string
+            - Name: AUD_PH_SQNBR
+              Type: int
+            - Name: WP_ISTNC_SQNBR
+              Type: int
+            - Name: WP_ISTNC_SECT_SQNBR
+              Type: int
+            - Name: DELE_ID
+              Type: int
+            - Name: WPIS_DELE_SUPP_INFO_SQNBR
+              Type: int
+            - Name: SUPP_INFO_TCD
+              Type: string
+            - Name: SUPP_INFO_TXT_VAL
+              Type: string
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+
+#######################################
+# 235- Glue Iceberg Table TWPISTN
+#######################################
+  GlueTableTWPISTN:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twpistn table description"
+        Name: "twpistn"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twpistn/"
+          Columns:
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: CMPL_TBR_ID
+              Type: int
+            - Name: FP_ID
+              Type: int
+            - Name: AUD_PH_CD
+              Type: string
+            - Name: AUD_PH_SQNBR
+              Type: int
+            - Name: WP_ISTNC_SQNBR
+              Type: int
+            - Name: WP_DEF_ID
+              Type: int
+            - Name: WP_DEF_VERS_NBR
+              Type: int
+            - Name: TX_RTN_CMPNT_SQNBR
+              Type: int
+            - Name: PRIM_DELE_ID
+              Type: int
+            - Name: WP_ISTNC_AUD_PH_FNL_IND
+              Type: string
+            - Name: TBR_REQ_IND
+              Type: string
+            - Name: LD_IND
+              Type: string
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: CRA_FRM_ID
+              Type: int
+            - Name: WP_NBR_TXT
+              Type: string
+            - Name: WP_SCD
+              Type: string
+            - Name: WP_RLVC_CD
+              Type: string
+
+#######################################
+# 236- Glue Iceberg Table TWRKDSA
+#######################################
+  GlueTableTWRKDSA:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twrkdsa table description"
+        Name: "twrkdsa"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twrkdsa/"
+          Columns:
+            - Name: WFLDR_DEF_ID
+              Type: int
+            - Name: WFLDR_DEF_VERS_NBR
+              Type: int
+            - Name: WRK_DEF_SPCL_ATTR_ALT_ID
+              Type: string
+            - Name: WRK_DEF_SPCL_ATTR_SQNBR
+              Type: int
+            - Name: WRK_DEF_SPCL_ATTR_CD
+              Type: string
+            - Name: WRK_DEF_SPCL_ATTR_DCML
+              Type: decimal(15,2)
+            - Name: WRK_DEF_SPCL_ATTR_TXT
+              Type: string
+            - Name: WRK_DEF_SPCL_ATTR_DT
+              Type: date
+            - Name: CTMSTMP
+              Type: timestamp
+            - Name: LD_IND
+              Type: string
+            - Name: TRK_TSTMP
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: WITM_DEF_ID
+              Type: int
+
+#######################################
+# 237- Glue Iceberg Table TWRKINS
+#######################################
+  GlueTableTWRKINS:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twrkins table description"
+        Name: "twrkins"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twrkins/"
+          Columns:
+            - Name: INVY_WRK_TCD
+              Type: string
+            - Name: WRK_SCD
+              Type: string
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: WRK_TCD
+              Type: string
+            - Name: WRK_STUS_EDTTM
+              Type: timestamp
+            - Name: WRK_ASGN_RSRC_ID
+              Type: int
+            - Name: WF_INVY_WRK_TCD
+              Type: string
+            - Name: WF_WRK_SCD
+              Type: string
+            - Name: OPCODE
+              Type: string
+
+#######################################
+# 238- Glue Iceberg Table TWRKRAR
+#######################################
+  GlueTableTWRKRAR:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twrkrar table description"
+        Name: "twrkrar"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twrkrar/"
+          Columns:
+            - Name: WRK_REF_ID
+              Type: int
+            - Name: WRK_REF_ASSOC_CCD
+              Type: string
+            - Name: WRK_REF_ASSOC_TCD
+              Type: string
+            - Name: WRK_REF_ASSOC_SQNBR
+              Type: int
+            - Name: TRK_UID
+              Type: string
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+
+#######################################
+# 239- Glue Iceberg Table TWRKRAS
+#######################################
+  GlueTableTWRKRAS:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twrkras table description"
+        Name: "twrkras"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twrkras/"
+          Columns:
+            - Name: WRK_REF_ID
+              Type: int
+            - Name: WRK_REF_ASSOC_CCD
+              Type: string
+            - Name: WRK_REF_ASSOC_TCD
+              Type: string
+            - Name: WRK_REF_ASSOC_SQNBR
+              Type: int
+            - Name: ASSOC_WRK_REF_ID
+              Type: int
+            - Name: CASE_AREA_ID
+              Type: int
+            - Name: WFLDR_ID
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: WRK_REF_ASSOC_SCD
+              Type: string
+            - Name: WRK_REF_ASSOC_STUS_RCD
+              Type: string
+            - Name: WRK_REF_ASSOC_EDTTM
+              Type: timestamp
+            - Name: WRK_REF_ASSOC_XDTTM
+              Type: timestamp
+            - Name: TRK_UID
+              Type: string
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+            - Name: SOI_ENTY_ID
+              Type: int
+
+#######################################
+# 240- Glue Iceberg Table TWRKREF
+#######################################
+  GlueTableTWRKREF:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twrkref table description"
+        Name: "twrkref"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twrkref/"
+          Columns:
+            - Name: WRK_REF_ID
+              Type: int
+            - Name: WRK_REF_TCD
+              Type: string
+            - Name: WRK_REF_EXRL_ID
+              Type: string
+            - Name: WRK_REF_NM
+              Type: string
+            - Name: WRK_REF_DESC
+              Type: string
+            - Name: WRK_REF_TITL_EDESC
+              Type: string
+            - Name: WRK_REF_TITL_FDESC
+              Type: string
+            - Name: TRK_UID
+              Type: string
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
+
+#######################################
+# 241- Glue Iceberg Table TWRKRSA
+#######################################
+  GlueTableTWRKRSA:
+    Type: AWS::Glue::Table
+    Condition: IsTest
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "twrkrsa table description"
+        Name: "twrkrsa"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/twrkrsa/"
+          Columns:
+            - Name: WRK_REF_ID
+              Type: int
+            - Name: WRK_REF_SQNBR
+              Type: int
+            - Name: DELE_ID
+              Type: int
+            - Name: WRK_REF_ATTR_SQNBR
+              Type: int
+            - Name: WRK_REF_ATTR_EDTTM
+              Type: timestamp
+            - Name: WRK_REF_ATTR_XDTTM
+              Type: timestamp
+            - Name: WRK_REF_ASSOC_CCD
+              Type: string
+            - Name: WRK_REF_ASSOC_TCD
+              Type: string
+            - Name: WRK_REF_ASSOC_SQNBR
+              Type: int
+            - Name: WRK_REF_ATTR_CD
+              Type: string
+            - Name: WRK_REF_ATTR_INTGR
+              Type: int
+            - Name: WRK_REF_ATTR_DCML
+              Type: decimal(15,2)
+            - Name: WRK_REF_ATTR_DT
+              Type: date
+            - Name: WRK_REF_ATTR_TM
+              Type: string
+            - Name: WRK_REF_ATTR_TXT
+              Type: string
+            - Name: WRK_REF_ATTR_IND
+              Type: string
+            - Name: TRK_UID
+              Type: string
+            - Name: SYS_SDTTM
+              Type: timestamp
+            - Name: SYS_NDTTM
+              Type: timestamp
+            - Name: TRANS_SDTTM
+              Type: timestamp
+            - Name: DCOP
+              Type: string
