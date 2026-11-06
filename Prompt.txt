@@ -1,8 +1,13 @@
-Repo prompt
+Data is not neat there are double quotes, indentation issues
+The datalake bucket thing
 
-1. Ran in DEV environment no issue
-Why did it fail?
-Which errors are from AWS and which are from elsewhere?
-What is the script doing?
-Where did the table sipped errors come from?
-Why are schema in one environment but not the other? Isnt the script pulling from the same place in SMUS regardless of environment?
+There are redundant tables that should not be repeated. There should be a section beneath the initial 172 for the newly added tables so that original DEV tables are separate from TEST tables
+
+The numbering should continue
+There should be a conditiona. See X file.
+
+First confirm that all 172 original tables either ran completely or were skipped_no_target. They were all found
+
+It should match the existing glue-cfn for formatting and include the condition from OVMT_example.
+
+Give me a plan first.

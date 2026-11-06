@@ -1,0 +1,1485 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "This nested stack deploys Glue Catalog Resources (Databse, Tables) schedules"
+Parameters:
+  Environment:
+    Type: String
+  Eapplid:
+    Type: String
+  Medallion:
+    Type: String
+  SourceIdentifier:
+    Type: String
+  SourceIdentifierVersion:
+    Type: String
+  DatalakeUnibucketName:
+    Type: String
+
+Conditions:
+  IsProd: !Equals [!Ref Environment, "prod"]
+
+Resources:
+  # ########################################
+  # # Glue Database
+  # # Template Reference - AWS::Glue::Database - https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-glue-database.html
+  # #######################################
+
+  GlueDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Description: !Sub "Glue database for ${SourceIdentifier}${SourceIdentifierVersion}"
+        Name: !Sub "${Environment}_${Eapplid}_${Medallion}_${SourceIdentifier}${SourceIdentifierVersion}_gluedb"
+
+#######################################
+# 1- Glue Iceberg Table TAPB
+# Template Reference 
+# AWS::Glue::Table - https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-glue-table.html
+#######################################
+  GlueTableTAPB:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tapb table description"
+        Name: "tapb"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tapb/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IITA_CDTTM
+              Type: timestamp
+            - Name: ASSOC_PB_DTL_AREA
+              Type: string
+            - Name: RLT_CLT_PB_RVSD_IND
+              Type: string
+
+#######################################
+# 2- Glue Iceberg Table 
+#######################################
+  GlueTableTASDTL:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tasdtl table description"
+        Name: "tasdtl"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tasdtl/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IITA_CDTTM
+              Type: timestamp
+            - Name: IIT_ACCT_DATA_GRP
+              Type: string
+            - Name: IIT_CNTL_GRP
+              Type: string
+            - Name: IIT_CORE_FED_GRP
+              Type: string
+            - Name: IIT_CORE_PROV_GRP
+              Type: string
+            - Name: IIT_CPP_QPP_GRP
+              Type: string
+            - Name: IIT_FAM_SUPT_GRP
+              Type: string
+            - Name: IIT_FED_DEDN_GRP
+              Type: string
+            - Name: IIT_FHSA_GRP
+              Type: string
+            - Name: IIT_GSTC_GRP
+              Type: string
+            - Name: IIT_HBP_LLP_GRP
+              Type: string
+            - Name: IIT_HIST_GRP
+              Type: string
+            - Name: IIT_ICRY_AMT_GRP
+              Type: string
+            - Name: IIT_INC_GRP
+              Type: string
+            - Name: IIT_MJ_GRP
+              Type: string
+            - Name: IIT_PEN_FAIR_GRP
+              Type: string
+            - Name: IIT_PMTCH_GRP
+              Type: string
+            - Name: IIT_PROV_DEDN_GRP
+              Type: string
+            - Name: IIT_QRLSP_GRP
+              Type: string
+            - Name: IIT_RGSTSP_OAS_PPG
+              Type: string
+            - Name: IIT_SFD_GRP
+              Type: string
+            - Name: IIT_TUIT_GRP
+              Type: string
+
+#######################################
+# 3- Glue Iceberg Table 
+#######################################
+  GlueTableTASMTRT:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tasmtrt table description"
+        Name: "tasmtrt"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tasmtrt/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IITA_CDTTM
+              Type: timestamp
+            - Name: IITA_SCD
+              Type: string
+            - Name: IITA_ORIG_CDTTM
+              Type: timestamp
+            - Name: PRCS_YR
+              Type: int
+            - Name: IIT_JRSD_CD
+              Type: string
+            - Name: IIT_RSDNT_PROV_CD
+              Type: string
+            - Name: IIT_NR_SCD
+              Type: string
+            - Name: IITR_DCES_STUS_IND
+              Type: string
+            - Name: NON_ELEC_DCES_RTN_IND
+              Type: string
+            - Name: BKCY_PRD_CD
+              Type: string
+            - Name: PRIM_INC_SRC_CAT_CD
+              Type: string
+            - Name: TOT_INCAMT
+              Type: decimal(13,0)
+            - Name: TOT_INC_CAM
+              Type: decimal(13,0)
+            - Name: IIT_RPT_PRD_NDT
+              Type: date
+            - Name: ASMT_DT
+              Type: date
+            - Name: IAS_ASMT_DT
+              Type: date
+            - Name: IITR_FIL_DT
+              Type: date
+            - Name: IIT_TRANS_TCD
+              Type: string
+            - Name: IIT_TRANS_SCD
+              Type: string
+            - Name: LCTR_NBR
+              Type: int
+            - Name: PPR_IITR_UNQ_IDNBR
+              Type: int
+            - Name: IIT_ASMT_TRANS_NBR
+              Type: int
+            - Name: TRANS_SET_ID
+              Type: int
+            - Name: TXPP_EFILR_NBR
+              Type: string
+            - Name: DCNTR_RGST_NBR
+              Type: string
+            - Name: IIT_TRANS_ACPT_CFM_NBR
+              Type: string
+            - Name: TX_PREP_SFTW_ID
+              Type: string
+            - Name: REP_NOA_RTRV_AUTH_IND
+              Type: string
+            - Name: ORCH_TRANS_SCD
+              Type: string
+            - Name: IIT_TRANS_SRC_CD
+              Type: string
+            - Name: IIT_TRANS_ORIG_SRC_CD
+              Type: string
+            - Name: IITR_TCD
+              Type: string
+            - Name: IITR_ARBTR_ASMT_IND
+              Type: string
+            - Name: FGN_PROP_OWN_CD
+              Type: string
+            - Name: INS_PAY_RMT_TCD
+              Type: string
+            - Name: IAS_FIL_MCD
+              Type: string
+            - Name: WRKLD_TCD
+              Type: string
+            - Name: WFL_CD
+              Type: string
+            - Name: MAC_IAS_TCD
+              Type: string
+            - Name: MAC_RASMT_TCD
+              Type: string
+            - Name: REQRD_RASMT_RCD
+              Type: string
+            - Name: RASMT_MTCH_CD
+              Type: string
+            - Name: ASMT_TC_CD
+              Type: string
+            - Name: TSO_CD
+              Type: string
+            - Name: RC_ID
+              Type: int
+            - Name: TSO_TC_CD
+              Type: string
+            - Name: CASE_SYS_SRC_CD
+              Type: string
+            - Name: CASE_NBR
+              Type: int
+            - Name: FNL_BAL_CAM
+              Type: decimal(13,2)
+            - Name: POF_AMT
+              Type: decimal(13,2)
+            - Name: NET_INC_CAM
+              Type: decimal(13,0)
+            - Name: TX_INC_CAM
+              Type: decimal(13,0)
+            - Name: NET_FED_TX_CAM
+              Type: decimal(13,2)
+            - Name: NET_PROV_TX_CAM
+              Type: decimal(13,2)
+            - Name: PROV_RTC_CAM
+              Type: decimal(9,2)
+            - Name: NET_BAL_CAM
+              Type: decimal(13,2)
+            - Name: FNL_BAL_AMT
+              Type: decimal(13,2)
+            - Name: TOT_RFND_CAM
+              Type: decimal(13,2)
+            - Name: BAL_FWD_CAM
+              Type: decimal(13,2)
+            - Name: UPD_PRCS_ID
+              Type: string
+            - Name: IIT_TBOP_SQNBR
+              Type: int
+            - Name: NO_NOA_RQRD_IND
+              Type: string
+            - Name: IITR_CAT_TCD
+              Type: string
+            - Name: VRF_HLD_RFND_ACCT_IND
+              Type: string
+            - Name: IITA_LDDTTM
+              Type: timestamp
+            - Name: AFR_RTN_IND
+              Type: string
+            - Name: AFR_REQ_DT
+              Type: date
+
+#######################################
+# 4- Glue Iceberg Table 
+#######################################
+  GlueTableTASTUS:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tastus table description"
+        Name: "tastus"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tastus/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IIT_TRANS_STUS_SQNBR
+              Type: int
+            - Name: IIT_TRANS_STUS_CDTTM
+              Type: timestamp
+            - Name: IITA_SCD
+              Type: string
+            - Name: TRANS_STUS_ORIG_CDTTM
+              Type: timestamp
+            - Name: IIT_TRANS_STUS_BUS_CDT
+              Type: date
+            - Name: IIT_TRANS_STUS_SRC_CD
+              Type: string
+            - Name: IIT_NR_SCD
+              Type: string
+            - Name: IIT_TRANS_STUS_RCD
+              Type: string
+            - Name: IIT_TRANS_TCD
+              Type: string
+            - Name: ORCH_TRANS_SCD
+              Type: string
+            - Name: ORCH_TRANS_EXCPT_CD
+              Type: string
+            - Name: ORCH_TRANS_EXCPT_SB_CD
+              Type: string
+            - Name: LCTR_NBR
+              Type: int
+            - Name: PPR_IITR_UNQ_IDNBR
+              Type: int
+            - Name: IIT_ASMT_TRANS_NBR
+              Type: int
+            - Name: TRANS_SET_ID
+              Type: int
+            - Name: IITR_ARBTR_ASMT_IND
+              Type: string
+            - Name: MAC_IAS_TCD
+              Type: string
+            - Name: IAS_FIL_MCD
+              Type: string
+            - Name: BKCY_PRD_CD
+              Type: string
+            - Name: IITR_CAT_TCD
+              Type: string
+            - Name: MEMO_LN
+              Type: string
+            - Name: CASE_SYS_SRC_CD
+              Type: string
+            - Name: CASE_NBR
+              Type: int
+            - Name: RC_ID
+              Type: int
+            - Name: UID
+              Type: string
+            - Name: UPD_PRCS_ID
+              Type: string
+            - Name: IIT_TRANS_STUS_LDDTTM
+              Type: timestamp
+
+#######################################
+# 5- Glue Iceberg Table 
+#######################################
+  GlueTableTAUTFLD:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tautfld table description"
+        Name: "tautfld"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tautfld/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IITA_CDTTM
+              Type: timestamp
+            - Name: AUTO_FLD_SQNBR
+              Type: int
+            - Name: AUTO_FLD_CD
+              Type: int
+            - Name: AUTO_EXCPT_CD
+              Type: string
+ 
+#######################################
+# 6- Glue Iceberg Table 
+#######################################
+  GlueTableTCBCK:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tcbck table description"
+        Name: "tcbck"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tcbck/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IITA_CDTTM
+              Type: timestamp
+            - Name: IITA_CBCK_EID
+              Type: date
+            - Name: IITA_CBCK_FLD_CD
+              Type: int
+            - Name: IITA_CBCK_AMT
+              Type: decimal(15,2)
+            - Name: IITA_CBCK_TX_YR
+              Type: int
+
+#######################################
+# 7- Glue Iceberg Table 
+#######################################
+  GlueTableTCLOG:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tclog table description"
+        Name: "tclog"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tclog/"
+          Columns:
+            - Name: CHNG_LOG_CDTTM
+              Type: timestamp
+            - Name: CHNG_LOG_SQNBR
+              Type: int
+            - Name: CHNG_LOG_CRT_YR
+              Type: string
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: ASMT_INST_TCD
+              Type: string
+            - Name: IIT_TRANS_STUS_SQNBR
+              Type: int
+            - Name: IITR_CAT_TCD
+              Type: string
+            - Name: OFRASMT_IND_SQNBR
+              Type: int
+            - Name: IITA_SCD
+              Type: string
+            - Name: CLT_DATA_CDTTM
+              Type: timestamp
+            - Name: REC_TCD
+              Type: string
+            - Name: UPD_PRCS_ID
+              Type: string
+            - Name: CLT_DATA_UPD_TCD
+              Type: string
+            - Name: REF_ID
+              Type: string
+
+#######################################
+# 8- Glue Iceberg Table 
+#######################################
+  GlueTableTINSDTL:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tinsdtl table description"
+        Name: "tinsdtl"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tinsdtl/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IITA_CDTTM
+              Type: timestamp
+            - Name: IITA_XPLN_SQNBR
+              Type: int
+            - Name: IITA_XPLN_DTL_SQNBR
+              Type: int
+            - Name: IITA_XPLN_FLD_CD
+              Type: int
+            - Name: IITA_XPLN_CLM_AMT
+              Type: decimal(15,2)
+            - Name: IITA_XPLN_SUPT_AMT
+              Type: decimal(15,2)
+ 
+#######################################
+# 9- Glue Iceberg Table 
+#######################################
+  GlueTableTINST:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tinst table description"
+        Name: "tinst"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tinst/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: ASMT_INST_TCD
+              Type: string
+            - Name: IITA_TCD
+              Type: string
+            - Name: IITR_CAT_TCD
+              Type: string
+            - Name: ASMT_INST_CDTTM
+              Type: timestamp
+            - Name: ASMT_INST_ORIG_CDTTM
+              Type: timestamp
+            - Name: UID
+              Type: string
+            - Name: USR_RC_ID
+              Type: int
+            - Name: USR_WS_ID
+              Type: int
+            - Name: INST_USR_OFC_CD
+              Type: string
+            - Name: IIT_SYS_INST_SET_CD
+              Type: string
+            - Name: ASMT_INST_ORIG_CD
+              Type: string
+            - Name: CASE_SYS_SRC_CD
+              Type: string
+            - Name: CASE_NBR
+              Type: int
+            - Name: WITM_NBR
+              Type: int
+            - Name: UPD_PRCS_ID
+              Type: string
+            - Name: ASMT_INST_LDDTTM
+              Type: timestamp
+
+#######################################
+# 10- Glue Iceberg Table 
+####################################### 
+  GlueTableTOFFROY:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "toffroy table description"
+        Name: "toffroy"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/toffroy/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: OFRASMT_IND_SQNBR
+              Type: int
+            - Name: OFRASMT_IND_CDTTM
+              Type: timestamp
+            - Name: OFRASMT_IND_ORIG_CDTTM
+              Type: timestamp
+            - Name: ASSOC_IITA_VNBR
+              Type: int
+            - Name: PGM_AREA_CD
+              Type: string
+            - Name: OFRASMT_IND_BUS_CDT
+              Type: date
+            - Name: UPD_PRCS_ID
+              Type: string
+            - Name: UID
+              Type: string
+            - Name: OFRASMT_IND_LDDTTM
+              Type: timestamp
+
+#######################################
+# 11- Glue Iceberg Table 
+#######################################
+  GlueTableTPEG:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tpeg table description"
+        Name: "tpeg"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tpeg/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: CLT_ID_CDTTM
+              Type: timestamp
+            - Name: VNBR
+              Type: int
+            - Name: CLT_ID_UPD_DTTM
+              Type: timestamp
+            - Name: CLT_ID_LDDTTM
+              Type: timestamp
+            - Name: LCK_TCD
+              Type: string
+            - Name: LCK_UPD_ID
+              Type: string
+            - Name: LCK_UNT_ID_TCD
+              Type: string
+            - Name: LCK_UNT_ID
+              Type: int
+            - Name: LCK_REF_ID
+              Type: string
+
+#######################################
+# 12- Glue Iceberg Table 
+#######################################
+  GlueTableTPNDLCK:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tpndlck table description"
+        Name: "tpndlck"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tpndlck/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: CLT_ID
+              Type: string
+            - Name: LCK_CDTTM
+              Type: timestamp
+            - Name: LCK_TCD
+              Type: string
+            - Name: LCK_UPD_ID
+              Type: string
+            - Name: LCK_UNT_ID_TCD
+              Type: string
+            - Name: LCK_UNT_ID
+              Type: int
+            - Name: LCK_REF_ID
+              Type: string
+
+#######################################
+# 13- Glue Iceberg Table 
+#######################################
+  GlueTableTPRTN:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tprtn table description"
+        Name: "tprtn"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tprtn/"
+          Columns:
+            - Name: NBR_LGC_PRTNS
+              Type: int
+            - Name: LGC_PRTN_ID
+              Type: int
+            - Name: MIN_PLCMT_ID
+              Type: int
+            - Name: MAX_PLCMT_ID
+              Type: int
+  
+#######################################
+# 14- Glue Iceberg Table 
+#######################################
+  GlueTableTPRTRAN:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tprtran table description"
+        Name: "tprtran"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tprtran/"
+          Columns:
+            - Name: UPD_PRCS_ID
+              Type: string
+            - Name: PRCS_SEG_NBR
+              Type: int
+            - Name: PND_TRANS_CDTTM
+              Type: timestamp
+            - Name: PND_TRANS_RCD
+              Type: string
+            - Name: PND_TRANS_SCD
+              Type: string
+            - Name: TRANS_TCD
+              Type: string
+            - Name: TRANS_STCD
+              Type: string
+            - Name: ORIG_RUN_SQNBR
+              Type: int
+            - Name: TRANS_ATMP_CNT
+              Type: int
+            - Name: VNBR
+              Type: int
+            - Name: PND_TRANS_UPD_DTTM
+              Type: timestamp
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: FROM_CLT_ID
+              Type: string
+            - Name: FROM_CLT_ID_MSN
+              Type: int
+            - Name: TO_CLT_ID
+              Type: string
+            - Name: TO_CLT_ID_MSN
+              Type: int
+            - Name: ANM_TRANS_TCD
+              Type: string
+            - Name: TRANS_DATA_AREA
+              Type: string
+
+#######################################
+# 15- Glue Iceberg Table 
+#######################################
+  GlueTableTRAPCHG:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "trapchg table description"
+        Name: "trapchg"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/trapchg/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IITA_CDTTM
+              Type: timestamp
+            - Name: RASMT_CHNG_FLD_CD
+              Type: int
+            - Name: RASMT_CHNG_RLT_TX_YR
+              Type: int
+            - Name: RASMT_CHNG_OLD_VAL
+              Type: string
+            - Name: RASMT_CHNG_CHNG_VAL
+              Type: string
+            - Name: RASMT_PRCS_RVW_ADJ_RCD
+              Type: string
+  
+#######################################
+# 16- Glue Iceberg Table 
+#######################################
+  GlueTableTRITMH:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tritmh table description"
+        Name: "tritmh"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tritmh/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IITA_CDTTM
+              Type: timestamp
+            - Name: IITA_RVSD_ITM_FLD_CD
+              Type: int
+            - Name: IITA_RVSD_ITM_SQNBR
+              Type: int
+            - Name: IITA_RVSD_ITM_OLD_VAL
+              Type: string
+            - Name: IITA_RVSD_ITM_NEW_VAL
+              Type: string
+            - Name: ORIG_VAL_CD
+              Type: string
+            - Name: RVS_TCD
+              Type: string
+            - Name: RVSR_UID
+              Type: string
+            - Name: PGM_WRK_TCD
+              Type: string
+            - Name: PGM_AREA_CD
+              Type: string
+            - Name: IITA_RVSD_ITM_WITM_NBR
+              Type: int
+
+#######################################
+# 17- Glue Iceberg Table 
+#######################################
+  GlueTableTRLENT:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "trlent table description"
+        Name: "trlent"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/trlent/"
+          Columns:
+            - Name: TRANS_PSTG_DTTM
+              Type: timestamp
+            - Name: TRANS_PSTG_DTTM_SQNBR
+              Type: int
+            - Name: TRANS_PSTG_ITM_SQNBR
+              Type: int
+            - Name: RL_ENT_CDTTM
+              Type: timestamp
+            - Name: TRANS_CRT_SYS_ID
+              Type: string
+            - Name: IIT_ASMT_TRANS_NBR
+              Type: int
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: CLT_ID
+              Type: string
+            - Name: TX_YR
+              Type: string
+            - Name: RL_ENT_LN_ITM_SQNBR
+              Type: int
+            - Name: REC_LYOT_VERS_CD
+              Type: string
+            - Name: UPD_PRCS_ID
+              Type: string
+            - Name: RL_ENT_AREA
+              Type: string
+  
+#######################################
+# 18- Glue Iceberg Table 
+#######################################
+  GlueTableTRLENTS:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "trlents table description"
+        Name: "trlents"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/trlents/"
+          Columns:
+            - Name: RL_RCPNT_ID
+              Type: string
+            - Name: FIL_CRT_SYS_ID
+              Type: string
+            - Name: RL_SUMM_SQNBR
+              Type: int
+            - Name: RL_SUMM_CDTTM
+              Type: timestamp
+            - Name: REC_LYOT_VERS_CD
+              Type: string
+            - Name: RL_SUMM_PREV_NDTTM
+              Type: timestamp
+            - Name: RL_SUMM_CUR_NDTTM
+              Type: timestamp
+            - Name: RL_SUMM_CRIT_NDTTM
+              Type: timestamp
+            - Name: RL_SUMM_RRUN_IND
+              Type: string
+            - Name: RL_SUMM_DTL_REC_CNT
+              Type: int
+            - Name: RL_SUMM_TOT_CR_AMT
+              Type: decimal(15,2)
+            - Name: RL_SUMM_TOT_DR_AMT
+              Type: decimal(15,2)
+  
+#######################################
+# 19- Glue Iceberg Table 
+#######################################
+  GlueTableTRLNFIN:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "trlnfin table description"
+        Name: "trlnfin"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/trlnfin/"
+          Columns:
+            - Name: TRANS_PSTG_DTTM
+              Type: timestamp
+            - Name: TRANS_PSTG_DTTM_SQNBR
+              Type: int
+            - Name: TRANS_PSTG_ITM_SQNBR
+              Type: int
+            - Name: NFIN_ENT_CDTTM
+              Type: timestamp
+            - Name: NFIN_ENT_BUS_CDT
+              Type: date
+            - Name: TRANS_CRT_SYS_ID
+              Type: string
+            - Name: IIT_ASMT_TRANS_NBR
+              Type: int
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: CLT_ID
+              Type: string
+            - Name: NFIN_ACCT_ID
+              Type: string
+            - Name: IIT_JRSD_CD
+              Type: string
+            - Name: TX_YR
+              Type: string
+            - Name: ASMT_DT
+              Type: date
+            - Name: CRDR_TCD
+              Type: string
+            - Name: TX_IND
+              Type: string
+            - Name: NFIN_LN_ITM_AMT
+              Type: decimal(13,2)
+            - Name: UPD_PRCS_ID
+              Type: string
+  
+#######################################
+# 20- Glue Iceberg Table 
+#######################################
+  GlueTableTRLTCLT:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "trltclt table description"
+        Name: "trltclt"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/trltclt/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IITA_CDTTM
+              Type: timestamp
+            - Name: RLT_CLT_RCD
+              Type: string
+            - Name: RLT_CLT_SQNBR
+              Type: int
+            - Name: RLT_CLT_ID_TCD
+              Type: string
+            - Name: RLT_CLT_ID
+              Type: string
+            - Name: RLT_CLT_CLM_SCD
+              Type: string
+            - Name: RLT_CLT_ITND_PRD_SQNBR
+              Type: int
+  
+#######################################
+# 21- Glue Iceberg Table 
+#######################################
+  GlueTableTUPDCTL:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tupdctl table description"
+        Name: "tupdctl"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tupdctl/"
+          Columns:
+            - Name: UPD_PRCS_ID
+              Type: string
+            - Name: PRCS_SEG_NBR
+              Type: int
+            - Name: UPD_RUN_SQNBR
+              Type: int
+            - Name: UPD_RUN_IN_PRGS_IND
+              Type: string
+            - Name: VNBR
+              Type: int
+            - Name: DB_UPD_CNTL_UPD_DTTM
+              Type: timestamp
+            - Name: ANM_CHNG_LOG_CDTTM
+              Type: timestamp
+            - Name: ANM_CHNG_LOG_SQNBR
+              Type: int
+            - Name: UPD_CNTL_AREA
+              Type: string
+
+#######################################
+# 22- Glue Iceberg Table 
+#######################################
+  GlueTableTVRFITM:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tvrfitm table description"
+        Name: "tvrfitm"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tvrfitm/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IITA_CDTTM
+              Type: timestamp
+            - Name: IIT_VRF_ITM_TCD
+              Type: string
+            - Name: IITA_VRF_CD
+              Type: string
+            - Name: IITA_VRF_RSPN_CD
+              Type: string
+
+#######################################
+# 23- Glue Iceberg Table 
+#######################################
+  GlueTableTXPLN:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "txpln table description"
+        Name: "txpln"
+        TableType: EXTERNAL_TABLE
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/txpln/"
+          Columns:
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IITA_TCD
+              Type: string
+            - Name: IIT_RPT_PRD_SQNBR
+              Type: int
+            - Name: IITA_VNBR
+              Type: int
+            - Name: IITA_CDTTM
+              Type: timestamp
+            - Name: IITA_XPLN_SQNBR
+              Type: int
+            - Name: XPLN_CD
+              Type: string
+            - Name: XPLN_SET_CD
+              Type: string
+
+#######################################
+# 24- Glue Iceberg Table 
+#######################################
+  GlueTableTXPLTXT:
+      Type: AWS::Glue::Table
+      Properties:
+        CatalogId: !Ref AWS::AccountId
+        DatabaseName: !Ref GlueDatabase
+        OpenTableFormatInput:
+          IcebergInput:
+            MetadataOperation: "CREATE"
+            Version: "2"
+        TableInput:
+          Description: "txpltxt table description"
+          Name: "txpltxt"
+          TableType: EXTERNAL_TABLE
+          Parameters:
+            Classification: "iceberg"
+          StorageDescriptor:
+            Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/txpltxt/"
+            Columns:
+              - Name: CLT_ID_TCD
+                Type: string
+              - Name: PLCMT_ID
+                Type: int
+              - Name: CLT_ID
+                Type: string
+              - Name: CLT_ID_MSN
+                Type: int
+              - Name: TX_YR
+                Type: int
+              - Name: IITA_TCD
+                Type: string
+              - Name: IIT_RPT_PRD_SQNBR
+                Type: int
+              - Name: IITA_VNBR
+                Type: int
+              - Name: IITA_CDTTM
+                Type: timestamp
+              - Name: IITA_XPLN_SQNBR
+                Type: int
+              - Name: IITA_XPLN_TXT
+                Type: string
+
+#######################################
+# 25- Glue Iceberg Table
+#######################################
+  GlueTableTFILELG:
+    Type: AWS::Glue::Table
+    Condition: IsProd
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDatabase
+      OpenTableFormatInput:
+        IcebergInput:
+          MetadataOperation: "CREATE"
+          Version: "2"
+      TableInput:
+        Description: "tfilelg table description"
+        Name: "tfilelg"
+        TableType: "EXTERNAL_TABLE"
+        Parameters:
+          Classification: "iceberg"
+        StorageDescriptor:
+          Location: !Sub "s3://${DatalakeUnibucketName}/${Medallion}/${SourceIdentifier}${SourceIdentifierVersion}/tfilelg/"
+          Columns:
+            - Name: DM_TIMESTAMP
+              Type: timestamp
+            - Name: DM_SEQUENCE
+              Type: bigint
+            - Name: DM_TXID
+              Type: bigint
+            - Name: DM_OPERATION_TYPE
+              Type: string
+            - Name: CLT_ID_TCD
+              Type: string
+            - Name: PLCMT_ID
+              Type: int
+            - Name: CLT_ID
+              Type: string
+            - Name: CLT_ID_MSN
+              Type: int
+            - Name: TX_YR
+              Type: int
+            - Name: IAS_FIL_MCD
+              Type: string
+            - Name: FIL_METH_ELG_CDTTM
+              Type: timestamp
+            - Name: FIL_ELG_ORIG_CDTTM
+              Type: timestamp
+            - Name: FIL_METH_ELG_NTF_DT
+              Type: date
+            - Name: FIL_METH_ELG_SEL_CDTTM
+              Type: timestamp
+            - Name: FIL_METH_ELG_SCD
+              Type: string
+            - Name: FIL_METH_ELG_STUS_RCD
+              Type: string
+            - Name: REP_ID
+              Type: string
+            - Name: UID
+              Type: string
+            - Name: UPD_PRCS_ID
+              Type: string
+            - Name: FIL_METH_ELG_LDDTTM
+              Type: timestamp
+
+#######################################
+# Outputs
+# User Guide - CloudFormation template Outputs syntax - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html
+#######################################
+Outputs:
+  GlueDatabase: 
+    Value: !Ref GlueDatabase
