@@ -1,0 +1,25 @@
+test_kg01_bronze_ahmt1_gluedb completed.
+
++-----------------+--------------+
+| table_name      |        count |
++-----------------+--------------+
+| thlog           |      380,516 |
+| tasmfcd         |      313,877 |
+| ttxpln          |      109,043 |
+| ttxplnv         |       91,537 |
+| ttasmtr         |       62,902 |
+| trlent          |       44,324 |
+| trapchg         |       32,467 |
+| trlnfin         |       17,116 |
+| ttracct         |        9,964 |
+| ttastus         |        2,151 |
+| trlents         |        1,233 |
+| tpndlck         |          403 |
+| ttlcbck         |          270 |
+| ttintrc         |            8 |
++-----------------+--------------+
+
+Skipped tables:
+  - totyori (skipped_zero_load)
+  - ttinhb (skipped_missing_pk)
+  - ttrvsdi (skipped_zero_load)
